@@ -13,6 +13,10 @@ import {
   ArcElement,
 } from "chart.js";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
+const API_BASE =
+        import.meta.env.MODE === "production"
+          ? "/api"
+          : "http://localhost:3000/api";
 
 ChartJS.register(
   LineElement,
@@ -41,15 +45,12 @@ function Summary() {
           setLoading(false);
           return;
         }
-
-        const res = await axios.get(
-          "http://localhost:3000/api/charts/summary-chart",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        
+        const res = await axios.get(`${API_BASE}/charts/summary-chart`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const rows = res.data || [];
 

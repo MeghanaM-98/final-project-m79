@@ -14,6 +14,12 @@ import {
   Legend,
 } from "chart.js";
 
+const API_BASE =
+  import.meta.env.MODE === "production"
+    ? "/api"
+    : "http://localhost:3000/api";
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -47,12 +53,12 @@ function Reports() {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        "http://localhost:3000/api/charts/reports-chart",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await axios.get(`${API_BASE}/charts/reports-chart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
 
       const data = res.data || [];
       if (!data.length) return;
