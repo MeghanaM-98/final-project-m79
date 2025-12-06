@@ -1,0 +1,916 @@
+/* ================= RESET + GLOBAL ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  background: #f5f7fa;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #1f2937;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  z-index: 1000;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.navbar-title-link {
+  text-decoration: none;
+  color: white;         /* keep your existing navbar color */
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.navbar-title-link:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+
+/* ================= APP SHELL (NEW LAYOUT) ================= */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f3f4f6;
+}
+
+/* Top bar */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 24px;
+  height: 56px;
+  background: #111827;
+  color: #f9fafb;
+}
+
+.app-header__brand {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.app-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.nav-link:hover {
+  background: rgba(249, 250, 251, 0.08);
+}
+
+.nav-link--active {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+/* Logout button */
+.btn-logout {
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background: #b91c1c;
+}
+
+/* Main content area */
+.app-main {
+  flex: 1;
+  padding: 8px 24px 16px; /* smaller top padding so card hugs the header */
+  overflow-x: hidden;     /* kill any horizontal scrollbar from charts */
+}
+
+/* ================= GENERIC CARD / FORM / BUTTONS ================= */
+
+.card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn.primary:hover {
+  background: #1d4ed8;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.note {
+  margin-top: 12px;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+/* ================= LOGIN PAGE (FULL SCREEN) ================= */
+
+/* Full page container */
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+}
+
+/* Video layer */
+.login-video-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.login-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  filter: blur(4px) brightness(0.75);
+}
+
+/* Soft purple overlay on top of video */
+.login-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 80%, rgba(140, 82, 255, 0.4), transparent 55%)
+      , radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.14), transparent 55%);
+  z-index: 1;
+  mix-blend-mode: soft-light;
+}
+
+/* Foreground wrapper (trends + card) */
+.login-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 48px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  color: #f8f5ff;
+}
+
+
+/* Left-side trends text */
+.login-trends {
+  flex: 1.2;
+  max-width: 480px;
+}
+
+.login-trends-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.login-trends-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.login-trends-list li + li {
+  margin-top: 4px;
+}
+
+.trend-label {
+  opacity: 0.9;
+}
+
+.trend-value {
+  font-weight: 600;
+}
+
+/* Login card in the center/right (your existing styles, tweaked a bit) */
+.login-card {
+  align-items: right;
+  flex: 1;
+  max-width: 420px;
+  background: rgba(22, 22, 48, 0.78);
+  border-radius: 18px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-label {
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(8, 8, 28, 0.75);
+  color: #ffffff;
+  outline: none;
+}
+
+.login-input:focus {
+  border-color: #6ea3ff;
+  box-shadow: 0 0 0 1px rgba(110, 163, 255, 0.5);
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 0.75rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #9dc4ff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+.login-submit {
+  margin-top: 14px;
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-footer-text {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.login-message {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #ffb4b4;
+}
+
+/* Mobile: stack trends under card or hide them */
+@media (max-width: 900px) {
+  .login-overlay {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+    padding-top: 72px;
+  }
+
+  .login-trends {
+    max-width: 600px;
+    order: 2;
+    font-size: 0.85rem;
+  }
+
+  .login-card {
+    order: 1;
+    width: 100%;
+  }
+}
+
+/* Giant Garamond title on the right side */
+.login-right-title {
+  font-family: "Moetya", "Moetya", serif;
+  font-weight: 700; /* bold */
+  font-size: 4.5rem; /* HUGE text */
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+
+  /* Positioning */
+  flex: 1.3;
+  padding-right: 40px;
+
+  /* Soft glow for cinematic effect */
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Adjust layout so card and title sit side by side */
+.login-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ================= REPORTS PAGE – FULL-SCREEN FIT ================= */
+
+.reports-page {
+  position: relative;
+
+  /* behave like a full-screen panel under the header */
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(100vh - 56px);
+
+  margin: 0; /* no extra white band under header */
+  padding: 1.25rem 1.5rem 1rem;
+
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* page heading */
+.reports-page > h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* ===== KPI CARDS ROW ===== */
+
+.reports-metrics {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.metric-card {
+  flex: 1;
+  background: #f5f7fb;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.metric-card h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: #4b5563;
+}
+
+.metric-main {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0.1rem 0;
+  color: #111827;
+}
+
+.metric-sub {
+  font-size: 0.8rem;
+  margin: 0;
+  color: #6b7280;
+}
+
+/* ===== MAIN CHART + SIDE CHARTS LAYOUT ===== */
+
+.reports-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr); /* left > right */
+  gap: 1.5rem;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+
+  flex: 1; /* this whole section grows to fill space above footnote */
+}
+
+/* big combo chart on the left */
+.reports-main-chart {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0.75rem 1rem 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* prevent chart from pushing width */
+}
+
+/* right column with donut + bar */
+.reports-side-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+/* each side chart fills half of the column */
+.small-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0.75rem 1rem 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* make sure charts never overflow their cards */
+.reports-main-chart canvas,
+.reports-side-charts canvas,
+.small-card canvas {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* ===== FOOTNOTE / INSIGHTS TEXT CARD ===== */
+
+.reports-footnote {
+  background: #ffffff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #444;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+  margin-top: 0.5rem;
+}
+
+/* Dashboard layout */
+.dashboard-card {
+  padding: 24px 28px 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 18px;
+}
+
+.dashboard-header h2 {
+  margin-bottom: 4px;
+}
+
+.dashboard-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Metric tiles row */
+.dashboard-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.dashboard-metric-tile {
+  background: #f3f4ff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+}
+
+
+.metric-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.metric-note {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Section subheading */
+.dashboard-section-title {
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Source footer */
+.dashboard-source {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.dashboard-source a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dashboard-source a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: stack tiles on smaller screens */
+@media (max-width: 900px) {
+  .dashboard-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== SUMMARY PAGE LAYOUT ===== */
+
+.summary-page {
+  margin-top: 1.5rem;
+}
+
+/* header: title + stat strip */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-subtitle {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: #5f6473;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.summary-stat-card {
+  min-width: 150px;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #f6f7fb;
+  border: 1px solid #e3e5f0;
+}
+
+.summary-stat-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7b8297;
+  margin-bottom: 0.25rem;
+}
+
+.summary-stat-value {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.summary-stat-footnote {
+  display: block;
+  font-size: 0.75rem;
+  color: #9094a8;
+}
+
+/* main split layout */
+.summary-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+/* chart container uses same card background */
+.summary-chart {
+  background: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7f1;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+/* right-side narrative panel */
+.summary-side-panel {
+  background: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7f1;
+  padding: 1rem 1.25rem 1.25rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.summary-side-heading {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary-bullets {
+  margin: 0.5rem 0 0.75rem;
+  padding-left: 1.1rem;
+}
+
+.summary-bullets li + li {
+  margin-top: 0.25rem;
+}
+
+.summary-source {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.75rem;
+}
+
+.summary-source a {
+  color: #2563eb;
+}
+
+.summary-tech {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e5e7f1;
+}
+
+.summary-tech-heading {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+/* responsive: stack on narrow screens */
+@media (max-width: 960px) {
+  .summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Column of charts on the left side of summary */
+.summary-charts-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-mini-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.summary-mini-subtitle {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Region breakdown block */
+.summary-region-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.summary-region-chart {
+  flex: 0 0 120px;
+  height: 120px;
+}
+
+.summary-region-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.region-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+
+.region-dot--us {
+  background: rgba(59, 130, 246, 0.9);
+}
+.region-dot--eu {
+  background: rgba(16, 185, 129, 0.9);
+}
+.region-dot--mea {
+  background: rgba(251, 191, 36, 0.9);
+}
+.region-dot--il {
+  background: rgba(244, 114, 182, 0.9);
+}
+
+/* Forecast block */
+.summary-forecast {
+  margin-top: 0.25rem;
+}
+
+.summary-forecast-heading {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Momentum gauge */
+.summary-gauge-card {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e5e7f1;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.summary-gauge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+
+.summary-gauge-label {
+  font-weight: 600;
+}
+
+.summary-gauge-score {
+  font-weight: 700;
+  color: #111827;
+}
+
+.summary-gauge-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  margin-bottom: 0.35rem;
+}
+
+.summary-gauge-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+}
+
+.summary-gauge-caption {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+/* Responsive tweaks */
+@media (max-width: 960px) {
+  .summary-region-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-region-chart {
+    flex: 0 0 140px;
+    width: 140px;
+  }
+}
+
+
+
