@@ -3,6 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext"; // auth hook
 
+const API_BASE =
+  import.meta.env.MODE === "production"
+    ? "/api"
+    : "http://localhost:3000/api";
+
 function Login() {
   const [mode, setMode] = useState("login"); // "login" or "register"
   const [username, setUsername] = useState("");
@@ -32,7 +37,7 @@ function Login() {
     try {
       if (mode === "register") {
         // Registration flow
-        await axios.post("http://localhost:3000/api/auth/register", {
+        await axios.post(`${API_BASE}/auth/register`, {
           username,
           password,
         });
@@ -40,7 +45,7 @@ function Login() {
         setMode("login");
       } else {
         // Login flow
-        const res = await axios.post("http://localhost:3000/api/auth/login", {
+        const res = await axios.post(`${API_BASE}/auth/login`, {
           username,
           password,
         });
