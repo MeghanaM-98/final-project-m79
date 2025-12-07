@@ -37,7 +37,7 @@ You will no longer see the Login page unless you log out.
 
 ---
 
-## 3️⃣ Navigate the Website
+##  Navigate the Website
 
 After logging in, the **top navigation bar** is visible on every page.  
 You can explore the site using these tabs:
@@ -101,7 +101,7 @@ This interaction flow demonstrates a complete user journey through your secure S
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 This project delivers a complete **Generative AI Insights Dashboard** featuring interactive charts, secure authentication, and real-time analytics sourced from backend APIs. It highlights venture-capital funding trends, regional investment patterns, and market momentum in the global Generative AI landscape (2023–H1 2025).
 
@@ -120,16 +120,16 @@ Users begin at a login screen, then access:
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🔐 Authentication  
+###  Authentication  
 - Login, registration, and logout  
 - JWT-secured routes  
 - Remember-me functionality  
 - Redirect to Dashboard after login  
 - Access control: protected Pages require a valid token  
 
-### 📊 Charts & Analytics  
+### Charts & Analytics  
 - Two fully dynamic charts pulled from backend APIs  
 - Additional supporting static charts  
 - Built using **Chart.js**  
@@ -137,21 +137,21 @@ Users begin at a login screen, then access:
   - `/api/charts/summary-chart`
   - `/api/charts/reports-chart`
 
-### 🖥 SPA Frontend  
+### SPA Frontend  
 - Built using **React + Vite**  
 - Responsive, accessible design  
 - WCAG-friendly ARIA labels & semantic structure  
 - Video background on Login screen  
 - Top navigation on all authenticated pages  
 
-### 🗄 Backend Architecture  
+###  Backend Architecture  
 - Node.js + Express  
 - JWT authentication middleware  
 - MySQL connection pooling  
 - Environment-based configuration via `.env`  
 - Modularized route structure
 
-### 💽 MySQL Database  
+###  MySQL Database  
 Tables include:
 - `users`
 - `summary_funding`
@@ -159,7 +159,7 @@ Tables include:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 project/
 ├── Backend/
@@ -208,7 +208,7 @@ project/
 | GET    | `/api/charts/summary-chart`  | Summary page chart data     |
 | GET    | `/api/charts/reports-chart`  | Reports page chart data     |
 
-## 📊 Data Source
+## Data Source
 
 This dashboard uses insights from:
 
