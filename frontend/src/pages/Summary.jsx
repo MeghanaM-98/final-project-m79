@@ -118,7 +118,7 @@ function Summary() {
     },
   };
 
-  // === 2. Other charts can stay as static for now ===
+  // === 2. Other charts can stay as static for now as the requirement of 2 dynamic chart with 2 different end points are meet. ===
 
   const dealCountData = {
     labels: ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "H1 2025"],
